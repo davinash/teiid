@@ -96,5 +96,6 @@
     <module>infinispan</module>
     <module>misc</module>
     <module>sandbox</module>
+    <module>geode</module>
   </modules>
 </project>

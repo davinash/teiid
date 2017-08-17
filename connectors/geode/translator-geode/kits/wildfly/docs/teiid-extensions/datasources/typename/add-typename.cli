@@ -1,0 +1,3 @@
+/subsystem=teiid/translator=typename:add(module=org.teiid.translator.geode)
+
+
