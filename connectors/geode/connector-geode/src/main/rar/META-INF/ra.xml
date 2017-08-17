@@ -31,8 +31,12 @@
             </config-property>
 
             <!-- geode Specific properties START -->
+            <config-property>
+               <description>{$display:"Apache Geode Locator List", $description:"Locator List (host:port[;host:port...]) to connect to", $required:"true"}</description>
+               <config-property-name>LocatorList</config-property-name>
+               <config-property-type>java.lang.String</config-property-type>
+            </config-property>
 
-                    
             <!-- geode Specific properties END -->
             
             <connectionfactory-interface>javax.resource.cci.ConnectionFactory</connectionfactory-interface>
