@@ -1,5 +1,5 @@
 /subsystem=resource-adapters/resource-adapter=connector:add(module=org.teiid.resource.adapter.geode)
-/subsystem=resource-adapters/resource-adapter=connector/connection-definitions=connectorDS:add(jndi-name="java:/connectorDS", class-name=org.teiid.resource.adapter.geode.geodeManagedConnectionFactory, enabled="true", use-java-context="true")
+/subsystem=resource-adapters/resource-adapter=connector/connection-definitions=connectorDS:add(jndi-name="java:/connectorDS", class-name=org.teiid.resource.adapter.geode.GeodeManagedConnectionFactory, enabled="true", use-java-context="true")
 #/subsystem=resource-adapters/resource-adapter=connector/connection-definitions=connectorDS/config-properties=propertyName:add(value="propertyValue")
 /subsystem=resource-adapters/resource-adapter=connector:activate
 

@@ -6,7 +6,7 @@ package org.teiid.resource.adapter.geode;
 
 import org.teiid.resource.spi.BasicResourceAdapter;
 
-public class geodeResourceAdapter extends BasicResourceAdapter {
+public class GeodeResourceAdapter extends BasicResourceAdapter {
 
 	@Override
 	public int hashCode() {

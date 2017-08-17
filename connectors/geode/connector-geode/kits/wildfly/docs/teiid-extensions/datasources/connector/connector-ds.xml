@@ -5,7 +5,7 @@
                     <module slot="main" id="org.teiid.resource.adapter.geode"/>
                     <transaction-support>NoTransaction</transaction-support>
                     <connection-definitions>
-                        <connection-definition class-name="org.teiid.resource.adapter.geode.geodeManagedConnectionFactory" jndi-name="java:/connectorDS" enabled="true" use-java-context="true" pool-name="connectorDS">
+                        <connection-definition class-name="org.teiid.resource.adapter.geode.GeodeManagedConnectionFactory" jndi-name="java:/connectorDS" enabled="true" use-java-context="true" pool-name="connectorDS">
                             <!--config-property name="propertyName">
                                 propertyValue
                             </config-property-->

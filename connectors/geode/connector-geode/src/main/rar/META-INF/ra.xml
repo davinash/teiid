@@ -16,11 +16,11 @@
       <license-required>true</license-required>
    </license>
    <resourceadapter>
-      <resourceadapter-class>org.teiid.resource.adapter.geode.geodeResourceAdapter</resourceadapter-class>
+      <resourceadapter-class>org.teiid.resource.adapter.geode.GeodeResourceAdapter</resourceadapter-class>
 
       <outbound-resourceadapter>
          <connection-definition>
-            <managedconnectionfactory-class>org.teiid.resource.adapter.geode.geodeManagedConnectionFactory</managedconnectionfactory-class>
+            <managedconnectionfactory-class>org.teiid.resource.adapter.geode.GeodeManagedConnectionFactory</managedconnectionfactory-class>
 
             <!-- Common properties for all connectors -->
             <config-property>

@@ -15,18 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.teiid.translator.geode;
 
-import java.util.ResourceBundle;
 
-import org.teiid.core.BundleUtil;
+import javax.resource.ResourceException;
+import javax.resource.cci.Connection;
 
 
-public class geodePlugin { 
-    public static final String PLUGIN_ID = "org.teiid.translator.geode" ; //$NON-NLS-1$
-	public static final BundleUtil UTIL = new BundleUtil(PLUGIN_ID,PLUGIN_ID + ".i18n", ResourceBundle.getBundle(PLUGIN_ID + ".i18n")); //$NON-NLS-1$ //$NON-NLS-2$
-	
-	public static enum Event implements BundleUtil.Event{
-	}
+public interface GeodeConnection extends Connection {
+    void someMethod() throws ResourceException;
 }

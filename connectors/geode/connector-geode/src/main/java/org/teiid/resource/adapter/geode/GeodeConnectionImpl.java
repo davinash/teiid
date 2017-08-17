@@ -10,21 +10,21 @@ import org.teiid.resource.spi.BasicConnection;
 import org.teiid.logging.LogManager;
 import org.teiid.core.BundleUtil;
 import org.teiid.logging.LogConstants;
-import org.teiid.translator.geode.geodeConnection;
+import org.teiid.translator.geode.GeodeConnection;
 
 /**
  * Connection to the resource. You must define geodeConnection interface, that 
  * extends the "javax.resource.cci.Connection".  If a custom translator is also being created,
  * the Connection interface should be defined in that project or a common project.
  */
-public class geodeConnectionImpl extends BasicConnection implements geodeConnection {
+public class GeodeConnectionImpl extends BasicConnection implements GeodeConnection {
 
-	public static final BundleUtil UTIL = BundleUtil.getBundleUtil(geodeConnectionImpl.class);
+	public static final BundleUtil UTIL = BundleUtil.getBundleUtil(GeodeConnectionImpl.class);
 
 
-    private geodeManagedConnectionFactory config;
+    private GeodeManagedConnectionFactory config;
 
-    public geodeConnectionImpl(geodeManagedConnectionFactory env) {
+    public GeodeConnectionImpl(GeodeManagedConnectionFactory env) {
         this.config = env;
         // todo: connect to your source here
         

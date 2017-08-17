@@ -16,16 +16,16 @@
  * limitations under the License.
  */
 
-package org.teiid.resource.adapter.geode;
+package org.teiid.translator.geode;
 
 import java.util.ResourceBundle;
 
 import org.teiid.core.BundleUtil;
 
 
-public class geodePlugin { 
-    public static final String PLUGIN_ID = "org.teiid.resource.adapter.geode" ; //$NON-NLS-1$
-	public static final BundleUtil Util = new BundleUtil(PLUGIN_ID,PLUGIN_ID + ".i18n", ResourceBundle.getBundle(PLUGIN_ID + ".i18n")); //$NON-NLS-1$ //$NON-NLS-2$
+public class GeodePlugin {
+    public static final String PLUGIN_ID = "org.teiid.translator.geode" ; //$NON-NLS-1$
+	public static final BundleUtil UTIL = new BundleUtil(PLUGIN_ID,PLUGIN_ID + ".i18n", ResourceBundle.getBundle(PLUGIN_ID + ".i18n")); //$NON-NLS-1$ //$NON-NLS-2$
 	
 	public static enum Event implements BundleUtil.Event{
 	}

@@ -18,18 +18,12 @@
 
 package org.teiid.translator.geode;
 
-import java.util.Arrays;
-
 import javax.resource.cci.ConnectionFactory;
 
-import org.teiid.core.types.DataTypeManager;
 import org.teiid.language.QueryExpression;
 import org.teiid.language.Select;
-import org.teiid.metadata.Column;
 import org.teiid.metadata.MetadataFactory;
 import org.teiid.metadata.RuntimeMetadata;
-import org.teiid.metadata.Table;
-import org.teiid.metadata.Column.SearchType;
 import org.teiid.translator.ExecutionContext;
 import org.teiid.translator.ExecutionFactory;
 import org.teiid.translator.ResultSetExecution;
@@ -37,10 +31,10 @@ import org.teiid.translator.Translator;
 import org.teiid.translator.TranslatorException;
 
 @Translator(name="typename", description="geode custom translator")
-public class geodeExecutionFactory extends ExecutionFactory<ConnectionFactory, geodeConnection> {
+public class GeodeExecutionFactory extends ExecutionFactory<ConnectionFactory, GeodeConnection> {
 
 	
-	public geodeExecutionFactory() {
+	public GeodeExecutionFactory() {
 	}
 	
     @Override
@@ -48,9 +42,9 @@ public class geodeExecutionFactory extends ExecutionFactory<ConnectionFactory, g
     }
 
     @Override
-    public ResultSetExecution createResultSetExecution(QueryExpression command, ExecutionContext executionContext, RuntimeMetadata metadata, geodeConnection connectionFactory)
+    public ResultSetExecution createResultSetExecution(QueryExpression command, ExecutionContext executionContext, RuntimeMetadata metadata, GeodeConnection connectionFactory)
     		throws TranslatorException {
-    	return new geodeExecution((Select)command);
+    	return new GeodeExecution((Select)command);
     }    
     
     public boolean supportsCompareCriteriaEquals() {
@@ -67,7 +61,7 @@ public class geodeExecutionFactory extends ExecutionFactory<ConnectionFactory, g
     }
     
 	@Override
-	public void getMetadata(MetadataFactory metadataFactory, geodeConnection connection) throws TranslatorException {
+	public void getMetadata(MetadataFactory metadataFactory, GeodeConnection connection) throws TranslatorException {
 	} 
 	
 	@Override

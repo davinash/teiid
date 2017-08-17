@@ -15,7 +15,7 @@
     <orderEntry type="module" module-name="teiid-common-core" scope="PROVIDED" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.resource:connector-api:1.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
-    <orderEntry type="library" name="Maven: org.teiid.translator:translator-geode:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="translator-geode" />
     <orderEntry type="module" module-name="teiid-api" scope="TEST" production-on-test="" />
     <orderEntry type="module" module-name="teiid-engine" scope="TEST" production-on-test="" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.0.0.Final" level="project" />

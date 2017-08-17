@@ -50,6 +50,11 @@
             <artifactId>translator-geode</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.teiid.translator</groupId>
+            <artifactId>translator-geode</artifactId>
+            <version>10.0.0.Alpha3-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

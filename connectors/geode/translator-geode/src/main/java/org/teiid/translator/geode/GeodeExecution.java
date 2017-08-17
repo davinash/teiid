@@ -19,30 +19,13 @@
 package org.teiid.translator.geode;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
 
-import org.teiid.language.ColumnReference;
-import org.teiid.language.Condition;
-import org.teiid.language.DerivedColumn;
-import org.teiid.language.Expression;
 import org.teiid.language.Select;
 import org.teiid.logging.LogConstants;
 import org.teiid.logging.LogManager;
-import org.teiid.metadata.Column;
 import org.teiid.translator.DataNotAvailableException;
 import org.teiid.translator.ResultSetExecution;
 import org.teiid.translator.TranslatorException;
@@ -51,7 +34,7 @@ import org.teiid.translator.TranslatorException;
 /**
  * Represents the execution of a command.
  */
-public class geodeExecution implements ResultSetExecution {
+public class GeodeExecution implements ResultSetExecution {
 
 
     private Select command;
@@ -64,14 +47,14 @@ public class geodeExecution implements ResultSetExecution {
     /**
      * 
      */
-    public geodeExecution(Select query) {
+    public GeodeExecution(Select query) {
         this.query = query;
     }
     
     @Override
     public void execute() throws TranslatorException {
         // Log our command
-        LogManager.logDetail(LogConstants.CTX_CONNECTOR, geodePlugin.UTIL.getString("execute_query", new Object[] { "geode", command })); //$NON-NLS-1$
+        LogManager.logDetail(LogConstants.CTX_CONNECTOR, GeodePlugin.UTIL.getString("execute_query", new Object[] { "geode", command })); //$NON-NLS-1$
     }    
 
 
@@ -99,13 +82,13 @@ public class geodeExecution implements ResultSetExecution {
 
     @Override
     public void close() {
-        LogManager.logDetail(LogConstants.CTX_CONNECTOR, geodePlugin.UTIL.getString("close_query")); //$NON-NLS-1$
+        LogManager.logDetail(LogConstants.CTX_CONNECTOR, GeodePlugin.UTIL.getString("close_query")); //$NON-NLS-1$
 
     
     }
 
     @Override
     public void cancel() throws TranslatorException {
-        LogManager.logDetail(LogConstants.CTX_CONNECTOR, geodePlugin.UTIL.getString("cancel_query")); //$NON-NLS-1$
+        LogManager.logDetail(LogConstants.CTX_CONNECTOR, GeodePlugin.UTIL.getString("cancel_query")); //$NON-NLS-1$
     }
 }

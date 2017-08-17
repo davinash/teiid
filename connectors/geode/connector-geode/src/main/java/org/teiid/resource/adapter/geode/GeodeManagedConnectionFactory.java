@@ -11,23 +11,23 @@ import org.teiid.resource.spi.BasicManagedConnectionFactory;
 
 import org.teiid.core.BundleUtil;
 
-public class geodeManagedConnectionFactory extends BasicManagedConnectionFactory {
+public class GeodeManagedConnectionFactory extends BasicManagedConnectionFactory {
 
-	public static final BundleUtil UTIL = BundleUtil.getBundleUtil(geodeManagedConnectionFactory.class);
+	public static final BundleUtil UTIL = BundleUtil.getBundleUtil(GeodeManagedConnectionFactory.class);
 
 	private String sampleProperty = null;
 	
 	@Override
-	public BasicConnectionFactory<geodeConnectionImpl> createConnectionFactory() throws ResourceException {
+	public BasicConnectionFactory<GeodeConnectionImpl> createConnectionFactory() throws ResourceException {
 
 		if (sampleProperty == null) {
-	 		throw new InvalidPropertyException(UTIL.getString("geodeManagedConnectionFactory.sampleproperty_not_set")); //$NON-NLS-1$
+	 		throw new InvalidPropertyException(UTIL.getString("GeodeManagedConnectionFactory.sampleproperty_not_set")); //$NON-NLS-1$
 		}
 		
-		return new BasicConnectionFactory<geodeConnectionImpl>() {
+		return new BasicConnectionFactory<GeodeConnectionImpl>() {
 			@Override
-			public geodeConnectionImpl getConnection() throws ResourceException {
-				return new geodeConnectionImpl(geodeManagedConnectionFactory.this);
+			public GeodeConnectionImpl getConnection() throws ResourceException {
+				return new GeodeConnectionImpl(GeodeManagedConnectionFactory.this);
 			}
 		};
 	}	
@@ -60,7 +60,7 @@ public class geodeManagedConnectionFactory extends BasicManagedConnectionFactory
 		if (getClass() != obj.getClass())
 			return false;
 			
-		geodeManagedConnectionFactory other = (geodeManagedConnectionFactory) obj;
+		GeodeManagedConnectionFactory other = (GeodeManagedConnectionFactory) obj;
 
 		if (!checkEquals(this.getSampleProperty(), other.getSampleProperty())) {
 			return false;
