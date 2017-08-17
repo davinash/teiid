@@ -10,6 +10,7 @@ import org.teiid.resource.spi.BasicConnection;
 import org.teiid.logging.LogManager;
 import org.teiid.core.BundleUtil;
 import org.teiid.logging.LogConstants;
+import org.teiid.translator.geode.geodeConnection;
 
 /**
  * Connection to the resource. You must define geodeConnection interface, that 
@@ -35,5 +36,10 @@ public class geodeConnectionImpl extends BasicConnection implements geodeConnect
     public void close() {
         LogManager.logDetail(LogConstants.CTX_CONNECTOR, "geode Connection has been closed."); //$NON-NLS-1$
     	
+    }
+
+    @Override
+    public void someMethod() throws ResourceException {
+
     }
 }
