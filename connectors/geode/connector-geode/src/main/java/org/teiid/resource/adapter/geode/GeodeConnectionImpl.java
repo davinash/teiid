@@ -30,7 +30,6 @@ public class GeodeConnectionImpl extends BasicConnection implements GeodeConnect
 
   public GeodeConnectionImpl(GeodeManagedConnectionFactory env) {
     this.config = env;
-    // todo: connect to your source here
     final Properties cacheProperties = new Properties();
     ClientCacheFactory ccf = new ClientCacheFactory(cacheProperties);
     this.config.getLocatorAddrPortPairList().forEach(P-> ccf.addPoolLocator(P.getFirst(), P.getSecond()));
@@ -39,7 +38,7 @@ public class GeodeConnectionImpl extends BasicConnection implements GeodeConnect
     this.geodeClientCache = (GemFireCacheImpl) ccf.create();
 
     LogManager
-        .logDetail(LogConstants.CTX_CONNECTOR, "geode Connection has been created."); //$NON-NLS-1$
+        .logDetail(LogConstants.CTX_CONNECTOR, "Geode Connection has been created."); //$NON-NLS-1$
 
   }
 
@@ -50,11 +49,11 @@ public class GeodeConnectionImpl extends BasicConnection implements GeodeConnect
       this.geodeClientCache.close();
     }
     LogManager
-        .logDetail(LogConstants.CTX_CONNECTOR, "geode Connection has been closed."); //$NON-NLS-1$
+        .logDetail(LogConstants.CTX_CONNECTOR, "Geode Connection has been closed."); //$NON-NLS-1$
   }
 
   @Override
-  public void someMethod() throws ResourceException {
-
+  public GemFireCacheImpl getInstance() {
+    return this.geodeClientCache;
   }
 }

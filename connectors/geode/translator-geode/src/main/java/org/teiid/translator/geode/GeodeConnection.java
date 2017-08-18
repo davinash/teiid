@@ -18,10 +18,12 @@
 package org.teiid.translator.geode;
 
 
+import org.apache.geode.internal.cache.GemFireCacheImpl;
+
 import javax.resource.ResourceException;
 import javax.resource.cci.Connection;
 
 
 public interface GeodeConnection extends Connection {
-    void someMethod() throws ResourceException;
+    GemFireCacheImpl getInstance();
 }

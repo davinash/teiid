@@ -30,43 +30,47 @@ import org.teiid.translator.ResultSetExecution;
 import org.teiid.translator.Translator;
 import org.teiid.translator.TranslatorException;
 
-@Translator(name="typename", description="geode custom translator")
+@Translator(name = "typename", description = "geode custom translator")
 public class GeodeExecutionFactory extends ExecutionFactory<ConnectionFactory, GeodeConnection> {
 
-	
-	public GeodeExecutionFactory() {
-	}
-	
-    @Override
-    public void start() throws TranslatorException {
-    }
 
-    @Override
-    public ResultSetExecution createResultSetExecution(QueryExpression command, ExecutionContext executionContext, RuntimeMetadata metadata, GeodeConnection connectionFactory)
-    		throws TranslatorException {
-    	return new GeodeExecution((Select)command);
-    }    
-    
-    public boolean supportsCompareCriteriaEquals() {
-        return true;
-    }
+  public GeodeExecutionFactory() {
+  }
 
-    public boolean supportsInCriteria() {
-        return true;
-    }
+  @Override
+  public void start() throws TranslatorException {
+  }
 
-    @Override
-    public boolean isSourceRequired() {
-    	return false;
-    }
-    
-	@Override
-	public void getMetadata(MetadataFactory metadataFactory, GeodeConnection connection) throws TranslatorException {
-	} 
-	
-	@Override
-	public boolean supportsOnlyLiteralComparison() {
-		return true;
-	}
-    
+  @Override
+  public ResultSetExecution createResultSetExecution(QueryExpression command,
+                                                     ExecutionContext executionContext,
+                                                     RuntimeMetadata metadata,
+                                                     GeodeConnection connection)
+      throws TranslatorException {
+    return new GeodeExecution((Select) command, connection.getInstance());
+  }
+
+  public boolean supportsCompareCriteriaEquals() {
+    return true;
+  }
+
+  public boolean supportsInCriteria() {
+    return true;
+  }
+
+  @Override
+  public boolean isSourceRequired() {
+    return false;
+  }
+
+  @Override
+  public void getMetadata(MetadataFactory metadataFactory, GeodeConnection connection)
+      throws TranslatorException {
+  }
+
+  @Override
+  public boolean supportsOnlyLiteralComparison() {
+    return true;
+  }
+
 }

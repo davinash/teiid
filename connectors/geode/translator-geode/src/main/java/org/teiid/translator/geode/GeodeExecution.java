@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.geode.internal.cache.GemFireCacheImpl;
 import org.teiid.language.Select;
 import org.teiid.logging.LogConstants;
 import org.teiid.logging.LogManager;
@@ -37,58 +38,60 @@ import org.teiid.translator.TranslatorException;
 public class GeodeExecution implements ResultSetExecution {
 
 
-    private Select command;
-    
-    // Execution state
-    Iterator<List<?>> results;
-    int[] neededColumns;
-    private Select query;
+  private final GemFireCacheImpl geodeClientCache;
+  private Select command;
 
-    /**
-     * 
-     */
-    public GeodeExecution(Select query) {
-        this.query = query;
+  // Execution state
+  Iterator<List<?>> results;
+  int[] neededColumns;
+  private Select query;
+
+  public GeodeExecution(Select query, GemFireCacheImpl instance) {
+    this.query = query;
+    this.geodeClientCache = instance;
+  }
+
+  @Override
+  public void execute() throws TranslatorException {
+    // Log our command
+    LogManager.logDetail(LogConstants.CTX_CONNECTOR,
+        GeodePlugin.UTIL.getString("execute_query", new Object[]{"geode", command})); //$NON-NLS-1$
+  }
+
+
+  @Override
+  public List<?> next() throws TranslatorException, DataNotAvailableException {
+    if (results.hasNext()) {
+      return projectRow(results.next(), neededColumns);
     }
-    
-    @Override
-    public void execute() throws TranslatorException {
-        // Log our command
-        LogManager.logDetail(LogConstants.CTX_CONNECTOR, GeodePlugin.UTIL.getString("execute_query", new Object[] { "geode", command })); //$NON-NLS-1$
-    }    
+    return null;
+  }
 
+  /**
+   * @param row
+   * @param neededColumns
+   */
+  static List<Object> projectRow(List<?> row, int[] neededColumns) {
+    List<Object> output = new ArrayList<Object>(neededColumns.length);
 
-    @Override
-    public List<?> next() throws TranslatorException, DataNotAvailableException {
-        if (results.hasNext()) {
-            return projectRow(results.next(), neededColumns);
-        }
-        return null;
-    }
-
-    /**
-     * @param row
-     * @param neededColumns
-     */
-    static List<Object> projectRow(List<?> row, int[] neededColumns) {
-        List<Object> output = new ArrayList<Object>(neededColumns.length);
-        
-        for(int i=0; i<neededColumns.length; i++) {
-            output.add(row.get(neededColumns[i]-1));
-        }
-        
-        return output;    
+    for (int i = 0; i < neededColumns.length; i++) {
+      output.add(row.get(neededColumns[i] - 1));
     }
 
-    @Override
-    public void close() {
-        LogManager.logDetail(LogConstants.CTX_CONNECTOR, GeodePlugin.UTIL.getString("close_query")); //$NON-NLS-1$
+    return output;
+  }
 
-    
-    }
+  @Override
+  public void close() {
+    LogManager.logDetail(LogConstants.CTX_CONNECTOR,
+        GeodePlugin.UTIL.getString("close_query")); //$NON-NLS-1$
 
-    @Override
-    public void cancel() throws TranslatorException {
-        LogManager.logDetail(LogConstants.CTX_CONNECTOR, GeodePlugin.UTIL.getString("cancel_query")); //$NON-NLS-1$
-    }
+
+  }
+
+  @Override
+  public void cancel() throws TranslatorException {
+    LogManager.logDetail(LogConstants.CTX_CONNECTOR,
+        GeodePlugin.UTIL.getString("cancel_query")); //$NON-NLS-1$
+  }
 }

@@ -15,27 +15,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/****
+ * This class also defines configuration variables, like user, password, URL etc to connect to
+ * the EIS system. Define an attribute for each configuration variable, and then provide both
+ * "getter" and "setter" methods for them. Note to use only "java.lang" objects as the attributes,
+ * DO NOT use Java primitives for defining and accessing the properties.
+ */
 public class GeodeManagedConnectionFactory extends BasicManagedConnectionFactory {
 
   public static final BundleUtil
       UTIL =
       BundleUtil.getBundleUtil(GeodeManagedConnectionFactory.class);
 
-  private String sampleProperty = null;
-  private String locatorList;
-  private List<Pair<String, Integer>> locatorAddrPortPairList;
+
+  private List<Pair<String, Integer>> locatorAddrPortPairList = null;
 
   @Override
   public BasicConnectionFactory<GeodeConnectionImpl> createConnectionFactory()
       throws ResourceException {
 
-    if (sampleProperty == null) {
-      throw new InvalidPropertyException(
-          UTIL.getString("GeodeManagedConnectionFactory.sampleproperty_not_set")); //$NON-NLS-1$
-    }
-
-    if ( locatorList == null) {
-      throw new InvalidPropertyException(UTIL.getString("GeodeManagedConnectionFactory.locatorList is not set"));
+    if (locatorListProperty == null) {
+      throw new InvalidPropertyException(UTIL.getString("NullLocatorProperty"));
     }
 
     validateLocatorProperty();
@@ -48,21 +48,18 @@ public class GeodeManagedConnectionFactory extends BasicManagedConnectionFactory
     };
   }
 
-  private void validateLocatorProperty()  throws ResourceException {
-    final String locators = this.getLocatorList();
+  private void validateLocatorProperty() throws ResourceException {
+    final String locators = this.getLocatorListProperty();
     this.locatorAddrPortPairList = new ArrayList<>();
     String[] locatorSpecs = locators.split(",");
     for (String locatorSpec : locatorSpecs) {
       String[] addrPort = locatorSpec.split(Pattern.quote("["));
       if (addrPort.length != 2) {
-        throw new InvalidPropertyException(
-            "Allowed format for locators is: \"addr[port], addr[port]\"");
+        throw new InvalidPropertyException(UTIL.getString("LocatorPropertyFormat"));
       } else if (addrPort[1].charAt(addrPort[1].length() - 1) != ']') {
-        throw new InvalidPropertyException(
-            "Allowed format for locators is: \"addr[port], addr[port]\"");
+        throw new InvalidPropertyException(UTIL.getString("LocatorPropertyFormat"));
       } else if (addrPort[1].length() < 2) {
-        throw new InvalidPropertyException(
-            "Allowed format for locators is: \"addr[port], addr[port]\"");
+        throw new InvalidPropertyException(UTIL.getString("LocatorPropertyFormat"));
       }
       String addr = addrPort[0];
       Integer port = Integer.parseInt(addrPort[1].substring(0, addrPort[1].length() - 1));
@@ -71,18 +68,12 @@ public class GeodeManagedConnectionFactory extends BasicManagedConnectionFactory
   }
 
   // ra.xml files getters and setters go here.
-  public String getSampleProperty() {
-    return sampleProperty;
+  private String locatorListProperty = null;
+  public String getLocatorListProperty() {
+    return locatorListProperty;
   }
-
-  public void setSampleProperty(String property) {
-    this.sampleProperty = property;
-  }
-
-  public String getLocatorList() { return locatorList;}
-
-  public void setLocatorList(String locatorList) {
-    this.locatorList = locatorList;
+  public void setLocatorListProperty(String locatorListProperty) {
+    this.locatorListProperty = locatorListProperty;
   }
 
   public List<Pair<String, Integer>> getLocatorAddrPortPairList() {
@@ -95,8 +86,7 @@ public class GeodeManagedConnectionFactory extends BasicManagedConnectionFactory
     int result = 1;
     result = prime
         * result
-        + ((sampleProperty == null) ? 0 : sampleProperty.hashCode())
-        + ((locatorList == null) ? 0 : locatorList.hashCode());
+        + ((locatorListProperty == null) ? 0 : locatorListProperty.hashCode());
     return result;
   }
 
@@ -113,11 +103,7 @@ public class GeodeManagedConnectionFactory extends BasicManagedConnectionFactory
     }
 
     GeodeManagedConnectionFactory other = (GeodeManagedConnectionFactory) obj;
-
-    if (!checkEquals(this.getSampleProperty(), other.getSampleProperty())) {
-      return false;
-    }
-    if (!checkEquals(this.getLocatorList(), other.getLocatorList())) {
+    if (!checkEquals(this.getLocatorListProperty(), other.getLocatorListProperty())) {
       return false;
     }
 
